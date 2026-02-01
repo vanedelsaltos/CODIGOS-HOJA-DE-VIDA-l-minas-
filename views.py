@@ -186,7 +186,7 @@ def reconocimientos_lista(request):
 def crear_reconocimiento(request):
     perfil = obtener_perfil_activo()
 
-    # 👉 ESTO ES LO QUE FALTABA
+    
     if not perfil:
         return redirect('crear_perfil')
 
