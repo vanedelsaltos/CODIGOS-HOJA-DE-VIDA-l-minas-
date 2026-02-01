@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Administración CV</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body class="admin-body">
+
+    <header class="header-admin">
+        <div class="header-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                <a href="{% url 'inicio_admin' %}" style="text-decoration: none;" class="brand">
+                    <div class="brand-dot"></div>
+                    <h1>Administración</h1>
+                </a>
+                
+                <form method="POST" action="{% url 'logout' %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-link" style="text-decoration: none; border-radius: 10px; font-weight: 700; display: flex; align-items: center; gap: 5px;">
+                        Cerrar Sesión
+                    </button>
+                </form>
+            </div>
+
+            {% if request.resolver_match.url_name != 'inicio_admin' %}
+            <nav class="sub-nav">
+                <a href="{% url 'inicio_admin' %}" class="nav-link {% if request.resolver_match.url_name == 'inicio_admin' %}active{% endif %}">Dashboard</a>
+                <a href="{% url 'lista_perfiles' %}" class="nav-link {% if request.resolver_match.url_name == 'lista_perfiles' %}active{% endif %}">Perfiles</a>
+                <a href="{% url 'experiencia' %}" class="nav-link {% if request.resolver_match.url_name == 'experiencia' %}active{% endif %}">Experiencia</a>
+                <a href="{% url 'reconocimientos_lista' %}" class="nav-link {% if request.resolver_match.url_name == 'reconocimientos_lista' %}active{% endif %}">Reconocimientos</a>
+                <a href="{% url 'cursos_realizados' %}" class="nav-link {% if request.resolver_match.url_name == 'cursos_realizados' %}active{% endif %}">Cursos</a>
+                <a href="{% url 'productos_academicos' %}" class="nav-link {% if request.resolver_match.url_name == 'productos_academicos' %}active{% endif %}">Académicos</a>
+                <a href="{% url 'productos_laborales' %}" class="nav-link {% if request.resolver_match.url_name == 'productos_laborales' %}active{% endif %}">Laborales</a>
+                <a href="{% url 'venta_garage' %}" class="nav-link {% if request.resolver_match.url_name == 'venta_garage' %}active{% endif %}">Garage</a>
+            </nav>
+            {% endif %}
+        </div>
+    </header>
+
+
+    <main class="main-wrapper">
+        <div class="content-container">
+            {% block contenido %}
+            {% endblock %}
+        </div>
+    </main>
+
+    <footer class="footer-admin">
+        <div class="user-status">
+            <p>Conectada como: <strong>{{ user.username }}</strong></p>
+        </div>
+    </footer>
+
+</body>
+</html>
