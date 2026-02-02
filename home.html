@@ -1,0 +1,35 @@
+{% extends "base/base_home.html" %}
+
+
+{% block contenido %}
+<div class="main-canvas">
+    <div class="moving-shape shape-1"></div>
+    <div class="moving-shape shape-2"></div>
+    
+    <div class="bottom-curve"></div>
+
+    <div class="content-wrapper">
+        <h1 class="main-title">Bienvenido a la página de mi Hoja de Vida</h1>
+
+        <div class="glass-card">
+            <p class="card-text">
+                Descubre mi experiencia profesional, formación académica y proyectos realizados de manera clara, organizada y fácil de navegar.
+            </p>
+
+            <hr class="divider">
+
+            <h2 class="subtitle">¿Qué deseas hacer?</h2>
+
+            <div class="btn-container">
+                <a href="{% url 'publico_inicio' %}" class="btn-pop btn-cv">
+                    ✴ VER HOJA DE VIDA ✴
+                </a>
+
+                <a href="{% url 'login' %}" class="btn-pop btn-admin">
+                    ➜] INGRESAR COMO ADMINISTRADOR
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
