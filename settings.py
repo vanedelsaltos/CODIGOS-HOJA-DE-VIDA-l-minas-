@@ -30,17 +30,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your secret key')  # <-- ahora lee del .env
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'  # <-- ahora lee del .env y lo convierte a booleano
+DEBUG = True  
 
 #ALLOWED_HOSTS = os.environ.get(
 #   'ALLOWED_HOSTS',
 #    '127.0.0.1,localhost'
 #).split(',')
-ALLOWED_HOSTS = []
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
-
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -52,8 +48,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'hojadevida.apps.HojadevidaConfig',
-    'cloudinary',
-    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -68,7 +62,7 @@ MIDDLEWARE = [
 
 ]
 
-ROOT_URLCONF = 'conf_django.urls'
+ROOT_URLCONF = 'proyecto_hojadevida.urls'
 
 TEMPLATES = [
     {
@@ -85,8 +79,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'conf_django.wsgi.application'
-
+WSGI_APPLICATION = 'proyecto_hojadevida.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
@@ -100,7 +93,7 @@ else:
     DATABASES = {
         "default": {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'BDHOJADEVIDA',
+            'NAME': 'PROYECTO_HOJADEVIDA',
             'USER': 'postgres',
             'PASSWORD': '123456',
             'HOST': 'localhost',
@@ -154,12 +147,3 @@ LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/login/'
 
 
-#PARTE PARA CLOUDINARY
-
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),  # <-- ahora lee del .env
-    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),        # <-- ahora lee del .env
-    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),  # <-- ahora lee del .env
-}
-
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
